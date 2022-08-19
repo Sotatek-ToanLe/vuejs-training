@@ -1,0 +1,27 @@
+{
+  "todos": [
+    {
+      "id": 25,
+      "title": "todo 3",
+      "status": false
+    },
+    {
+      "id": 23,
+      "title": "todo 5",
+      "status": false
+    },
+    {
+      "id": 72,
+      "title": "todo 1",
+      "status": false
+    },
+    {
+      "id": 54,
+      "title": "todo 2",
+      "status": true
+    }
+  ],
+  "login": {
+    "token": "token_key"
+  }
+}
