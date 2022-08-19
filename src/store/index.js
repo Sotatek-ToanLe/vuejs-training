@@ -15,6 +15,13 @@ let store = new Vuex.Store({
     },
   },
   mutations: {
+    initialiseStore(state) {
+      if (localStorage.getItem('store')) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem('store')))
+        );
+      }
+    },
     setToken(state) {
       state.token = true;
     },
@@ -41,5 +48,10 @@ let store = new Vuex.Store({
     },
   },
   modules: {},
+});
+
+store.subscribe((mutation, state) => {
+  // Store the state object as a JSON string
+  localStorage.setItem('store', JSON.stringify(state));
 });
 export default store;

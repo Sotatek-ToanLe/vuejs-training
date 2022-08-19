@@ -15,7 +15,7 @@ const routes = [
     component: HomeView,
 
     meta: {
-      auth: true,
+      auth: false,
     },
   },
   {
@@ -25,7 +25,7 @@ const routes = [
     component: () => import('../views/AboutView.vue'),
 
     meta: {
-      auth: true,
+      auth: false,
     },
   },
 
@@ -34,7 +34,7 @@ const routes = [
     name: 'todoList',
     component: TodoList,
     meta: {
-      auth: false,
+      auth: true,
     },
   },
   {
@@ -43,7 +43,7 @@ const routes = [
     component: DetailTodo,
 
     meta: {
-      auth: true,
+      auth: false,
     },
   },
   {
@@ -52,7 +52,7 @@ const routes = [
     component: LoginPage,
 
     meta: {
-      auth: true,
+      auth: false,
     },
   },
 ];
@@ -63,8 +63,8 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (!to.meta.auth && !store.state.token) {
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.auth && !store.state.token) {
     next('login');
   } else {
     next();

@@ -1,11 +1,11 @@
 <template>
   <div>
-  
     {{ token}}
-   
+
+
+    
      <b-button @click="setToken" v-if="!token">Login</b-button>
      <b-button @click="logout" v-if="token">Log out</b-button>
-
   </div>
 </template>
 <script>
@@ -19,13 +19,13 @@ export default {
      
     }
   },
-  watch: {
-    '$store.state.token'(value) {
-      if (value) {
-        this.$router.push('/')
-      }
-    }
-  },
+  // watch: {
+  //   '$store.state.token'(value) {
+  //     if (value) {
+  //       this.$router.push('todo-list')
+  //     }
+  //   }
+  // },
   computed: {
     ...mapGetters(['getToken']),
     ...mapState(['token']),
