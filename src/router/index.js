@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import TodoList from '@/components/TodoList.vue';
-import DetailTodo from '@/components/DetailTodo.vue';
-import LoginPage from '@/components/Login.vue';
+import TodoList from '@/pages/TodoList.vue';
+import LoginPage from '@/pages/Login.vue';
+import DetailTodo from '@/pages/DetailTodo.vue';
+
 import store from '@/store';
 
 Vue.use(VueRouter);
@@ -16,6 +17,7 @@ const routes = [
 
     meta: {
       auth: false,
+      layout: 'CommonTemplate',
     },
   },
   {
@@ -26,6 +28,7 @@ const routes = [
 
     meta: {
       auth: false,
+      layout: 'CommonTemplate',
     },
   },
 
@@ -35,6 +38,7 @@ const routes = [
     component: TodoList,
     meta: {
       auth: true,
+      layout: 'LayoutTemplate',
     },
   },
   {
@@ -44,6 +48,7 @@ const routes = [
 
     meta: {
       auth: false,
+      layout: 'LayoutTemplate',
     },
   },
   {
@@ -53,6 +58,7 @@ const routes = [
 
     meta: {
       auth: false,
+      layout: 'DefaultTemplate',
     },
   },
 ];

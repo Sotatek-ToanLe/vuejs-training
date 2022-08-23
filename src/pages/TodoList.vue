@@ -41,6 +41,7 @@ export default {
     ...mapActions(['getTodoList']),
     ...mapState(['todolist'])
   },
+
   methods: {
 
     navidateTodo(type, id) {
@@ -59,7 +60,7 @@ export default {
       }
     
     },
-  
+   
   },
 
   async mounted() {
