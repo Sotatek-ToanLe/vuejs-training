@@ -8,6 +8,12 @@ let store = new Vuex.Store({
   state: {
     token: false,
     todolist: [],
+    stepLine: {
+      step1: false,
+      step2: false,
+      step3: false,
+      step4: false,
+    },
   },
   getters: {
     getToken(state) {
@@ -32,6 +38,17 @@ let store = new Vuex.Store({
     getListTodo(state, payload) {
       state.todolist = payload;
     },
+    changeStep(state, payload) {
+      if (payload.type === 'step1') {
+        state.stepLine.step1 = payload.value;
+      } else if (payload.type === 'step2') {
+        state.stepLine.step2 = payload.value;
+      } else if (payload.type === 'step3') {
+        state.stepLine.step3 = payload.value;
+      } else {
+        state.stepLine.step4 = payload.value;
+      }
+    },
   },
   actions: {
     async getTodoList({ commit }) {
@@ -45,6 +62,10 @@ let store = new Vuex.Store({
     async addTodo({ commit }, payload) {
       await addTodo(payload);
       commit('addTodo', payload);
+    },
+    changeStep(context, payload) {
+      context.commit('changeStep', payload);
+      console.log('payload:', payload);
     },
   },
   modules: {},

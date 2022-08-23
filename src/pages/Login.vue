@@ -9,7 +9,8 @@
 </template>
 <script>
 
-import { mapMutations, mapGetters, mapState } from 'vuex';
+import store from '@/store';
+import { mapMutations, mapGetters, mapState, mapActions } from 'vuex';
 import LoginStep1 from './LoginStep1.vue';
 import LoginStep2 from './LoginStep2.vue';
 import LoginStep3 from './LoginStep3.vue';
@@ -55,6 +56,15 @@ export default {
   },
   methods: {
     ...mapMutations(['setToken', 'logout']),
+    ...mapActions(['changeStep']),
+    checkEmpty(object) {
+      
+     const result =  Object.entries(object).every(([, value]) => {
+
+     return Boolean(value)
+     });
+      return result;
+    },
     handleShowStep( formData, type) {
      
       let temp1, temp2, temp3, temp4;
@@ -62,6 +72,14 @@ export default {
       if (type === 'step1') { 
         temp1 = { ...formData }
         console.log('temp1', temp1);
+       
+        if (this.checkEmpty(temp1)) { 
+          store.dispatch('changeStep', { type: 'step1', value: true });
+        }
+        
+
+        
+        console.log('store:', store.state.stepLine);
       } else if (type === 'step2') { 
         temp2 = { ...formData };
         console.log('temp2', temp2);
