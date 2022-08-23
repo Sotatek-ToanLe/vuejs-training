@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
 <div>
 <h3 class="start">Get Started</h3>
@@ -60,13 +61,13 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      this.$emit('isShowStep1', !this.visibale.isShowStep1, !this.visibale.isShowStep2, this.formData, 'step1' );
-      
-
+      // eslint-disable-next-line vue/no-mutating-props
+      this.visibale.isShowStep1 = !this.visibale.isShowStep1;
+      // eslint-disable-next-line vue/no-mutating-props
+      this.visibale.isShowStep2 = !this.visibale.isShowStep2;
+      this.$emit('isShowStep1', this.formData, 'step1');
     },
-    handleBack(e) {
-       e.preventDefault();
-    }
+   
   },
   
 }

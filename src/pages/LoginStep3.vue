@@ -1,37 +1,22 @@
 <template>
   <div>
-  <h3 class="start">Company Information (1/2)</h3>
+  <h3 class="start">Company Information (2/2)</h3>
     <p >Setup Your Company Information </p>
     <form>
+      <h4>Regulatory Status</h4>
      <div class="form-group">
-        <label for="email">Registered Legal Entity Name</label>
-        <div class="w-100">
-        <input type="email" id="email" placeholder="Registered Legal Entity Name" v-model="formData.legal"/>
-      
-        </div>
+        <label for="email">Does your VASP business have regulatory approval in your jurisdiction?</label>
+        
+       <b-form-radio-group
+        id="radio-group-1"
+        v-model="formData.selected"
+        :options="options"
+        name="radio-options"
+      ></b-form-radio-group>
       
       </div>
-       <div class="form-group">
-        <label for="code">Registration Authority. <span>How to find out Registration Authority Code</span> </label>
-        <div>
-        <b-form-select v-model="formData.author" class="mb-3"  :options="options">
-   
+      
      
-        </b-form-select>
-        </div>
-      
-      </div>
-      <div>
-        <h4>Registered Company Address</h4>
-      </div>
-       <div class="form-group">
-        <label for="address">Online Service (Brand) Name</label>
-        <input type="text" id="address" placeholder="Online Service (Brand) Name" v-model="formData.address" />
-      </div>
-       <div class="form-group">
-        <label for="confirm">Webpage URL</label>
-        <input type="password" id="confirm" placeholder="Cofirm Password" v-model="formData.confirm" />
-      </div>
       <div class="right">
          
          <button class="btn-back" @click="handleBack" >
@@ -53,17 +38,18 @@
 
 
 export default {
-  name: 'LoginStep2',
+  name: 'LoginStep3',
   data() { 
     return { 
       formData: {
-        legal: '',
-      author:null
+        selected: 'first',
+     
       },
       options: [
-      { value: null, text: 'Please select an option' },
-          { value: 'a', text: 'This is First option' },
-          { value: 'b', text: 'Selected Option', disabled: true },
+      { text: 'Toggle this custom radio', value: 'first' },
+          { text: 'Or toggle this other custom radio', value: 'second' },
+          { text: 'This one is Disabled', value: 'third', disabled: true },
+          { text: 'This is the 4th radio', value: { fourth: 4 } }
     ]
     }
   },
@@ -72,24 +58,22 @@ export default {
     visibale: Object
   },
    methods: {
-   
+     handleBack(e) {
+       e.preventDefault();
+         // eslint-disable-next-line vue/no-mutating-props
+       this.visibale.isShowStep3 = !this.visibale.isShowStep3;
+        // eslint-disable-next-line vue/no-mutating-props
+       this.visibale.isShowStep2 = !this.visibale.isShowStep2;
+       
+     },
      handleSubmit(e) {
        e.preventDefault();
         // eslint-disable-next-line vue/no-mutating-props
        this.visibale.isShowStep3 = !this.visibale.isShowStep3;
         // eslint-disable-next-line vue/no-mutating-props
-       this.visibale.isShowStep2 = !this.visibale.isShowStep2;
-      this.$emit('isShowStep2',this.formData, 'step2' );
-     },
-     handleBack(e) {
-       e.preventDefault();
-       // eslint-disable-next-line vue/no-mutating-props
-       this.visibale.isShowStep1 = !this.visibale.isShowStep1;
-        // eslint-disable-next-line vue/no-mutating-props
-       this.visibale.isShowStep2 = !this.visibale.isShowStep2;
-     
-    
-    }
+       this.visibale.isShowStep4 = !this.visibale.isShowStep4;
+      this.$emit('isShowStep3', this.formData, 'step3' );
+    },
    },
  
 
